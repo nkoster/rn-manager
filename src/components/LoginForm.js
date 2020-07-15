@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Text } from 'react-native'
 import { Card, CardSection, Input, Button } from './common'
-import { emailChanged, passwordChanged } from '../actions'
+import { emailChanged, passwordChanged, loginUser } from '../actions'
 
 class LoginForm extends Component {
     onEmailChange(email) {
@@ -10,6 +10,10 @@ class LoginForm extends Component {
     }
     onPasswordChange(password) {
         this.props.passwordChanged(password)
+    }
+    onButtonPress(user) {
+        const { email, password } = this.props
+        this.props.loginUser({ email, password })
     }
     render() {
         return (
@@ -31,7 +35,9 @@ class LoginForm extends Component {
                     />
                 </CardSection>
                 <CardSection>
-                    <Button onPress={_ => {}}><Text>HEY</Text></Button>
+                    <Button
+                        onPress={this.onButtonPress.bind(this)}
+                    ><Text>HEY</Text></Button>
                 </CardSection>
             </Card>
         )
@@ -45,4 +51,6 @@ const stateProps = state => {
     }
 }
 
-export default connect(stateProps, { emailChanged, passwordChanged })(LoginForm)
+export default connect(stateProps, {
+    emailChanged, passwordChanged, loginUser
+})(LoginForm)
