@@ -1,6 +1,6 @@
 import firebase from 'firebase'
 import { 
-    _emailChanged, _passwordChanged, _loginSuccess
+    _emailChanged, _passwordChanged, _loginSuccess, _loginFailed
 } from './types'
 
 export const emailChanged = email => {
@@ -32,7 +32,8 @@ export const loginUser = ({ email, password }) => {
     return dispatch => {
         firebase.auth().signInWithEmailAndPassword(email, password)
         .then(user => dispatchLogin(dispatch, user))
-        .catch(_ => {
+        .catch(err => {
+            console.log('Catched Error', err)
             firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(user => dispatchLogin(dispatch, user))
             .catch(err => dispatchLoginFailed(dispatch, err))
