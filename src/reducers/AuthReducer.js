@@ -1,8 +1,8 @@
 import {
-    _emailChanged, _passwordChanged, _loginSuccess, _loginFailed
+    _emailChanged, _passwordChanged, _loginSuccess, _loginFailed, _login
 } from '../actions/types'
 
-const initialState = { email: '', password: '', user: null, error: '' }
+const initialState = { email: '', password: '', user: null, error: '', loading: false }
 
 export default (state = initialState, action) => {
     console.log(action)
@@ -12,9 +12,11 @@ export default (state = initialState, action) => {
         case _passwordChanged:
             return { ...state, password: action.payload }
         case _loginSuccess:
-            return { ...state, user: action.payload, error: '' }
+            return { ...state, ...initialState, user: action.payload }
         case _loginFailed:
-            return { ...state, error: action.payload, password: '' }
+            return { ...state, error: action.payload, password: '', loading: false }
+        case _login:
+            return { ...state, loading: true, error: '' }
         default:
             return state
     }
