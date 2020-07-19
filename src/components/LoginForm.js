@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Text, View, StyleSheet } from 'react-native'
-import { Card, CardSection, Input, Button } from './common'
+import { Card, CardSection, Input, Button, Spinner } from './common'
 import { emailChanged, passwordChanged, loginUser } from '../actions'
 
 class LoginForm extends Component {
@@ -24,6 +24,20 @@ class LoginForm extends Component {
             )
         }
     }
+    renderButton() {
+        if (this.props.loading) {
+            return (
+                <Spinner />
+            )
+        }
+        return (
+            <CardSection>
+                <Button onPress={this.onButtonPress.bind(this)}>
+                    <Text>HEY</Text>
+                </Button>
+            </CardSection>
+        )
+    }
     render() {
         return (
             <Card>
@@ -44,11 +58,7 @@ class LoginForm extends Component {
                     />
                 </CardSection>
                 {this.renderError()}
-                <CardSection>
-                    <Button onPress={this.onButtonPress.bind(this)}>
-                        <Text>HEY</Text>
-                    </Button>
-                </CardSection>
+                {this.renderButton()}
             </Card>
         )
     }
@@ -62,11 +72,11 @@ const styles = StyleSheet.create({
     }
 })
 
-const stateProps = state => {
+// destructure from state
+const stateProps = ({ auth }) => {
+    const { email, password, error, loading } = auth
     return {
-        email: state.auth.email,
-        password: state.auth.password,
-        error: state.auth.error
+        email, password, error, loading
     }
 }
 
