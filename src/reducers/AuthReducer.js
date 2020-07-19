@@ -5,7 +5,6 @@ import {
 const initialState = { email: '', password: '', user: null, error: '', loading: false }
 
 export default (state = initialState, action) => {
-    console.log(action)
     switch(action.type) {
         case _emailChanged:
             return { ...state, email: action.payload }
