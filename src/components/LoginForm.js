@@ -16,11 +16,14 @@ class LoginForm extends Component {
         this.props.loginUser({ email, password })
     }
     renderError() {
+        console.log(this.props.error)
         if (this.props.error) {
             return (
-                <View style={{ backgroundColor: 'white', flex: 1 }}>
-                    <Text style={styles.error}>{this.props.error}</Text>
-                </View>
+                <CardSection>
+                    <View style={{ flex: 1 }}>
+                        <Text style={styles.error}>{this.props.error}</Text>
+                    </View>
+                </CardSection>
             )
         }
     }
