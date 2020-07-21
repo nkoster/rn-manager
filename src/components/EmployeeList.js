@@ -26,7 +26,7 @@ class EmployeeList extends Component {
         )
     }
     render() {
-        if (!this.props.employees.length)
+        if (!this.dataSource)
             return (
                 <Spinner />
             )
