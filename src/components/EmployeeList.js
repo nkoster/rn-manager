@@ -19,7 +19,6 @@ class EmployeeList extends Component {
             rowHasChanged: (r1, r2) => r1 !== r2
         })
         this.dataSource = dataStore.cloneWithRows(employees)
-        console.log('DATASOURCE', this.dataSource)
     }
     renderRow(employee) {
         return (
@@ -27,8 +26,6 @@ class EmployeeList extends Component {
         )
     }
     render() {
-        console.log('RENDER', this.props)
-        console.log(this.props.employees)
         if (!this.props.employees.length)
             return (
                 <Spinner />
