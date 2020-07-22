@@ -47,3 +47,14 @@ export const employeeSave = ({ name, phone, shift, uid }) => {
             })
     }
 }
+
+export const employeeKill = ({ uid }) => {
+    const { currentUser } = firebase.auth()
+    return _ => {
+        firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
+            .remove()
+            .then(_ => {
+                Actions.employees({ type: 'reset' })
+            })
+    }
+}
