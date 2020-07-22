@@ -41,6 +41,6 @@ export const employeeSave = ({ name, phone, shift, uid }) => {
     return dispatch => {
         firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
             .set({ name, phone, shift })
-            .then(_ => console.log('SAVED'))
+            .then(_ => Actions.employees({ type: 'reset' }))
     }
 }
