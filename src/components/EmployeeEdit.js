@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { employeeUpdate } from '../actions'
+import { employeeUpdate, employeeSave } from '../actions'
 import { Card, CardSection, Button } from './common'
 import EmployeeForm from './EmployeeForm'
 import _ from 'lodash'
@@ -13,7 +13,7 @@ class EmployeeEdit extends Component {
     }
     onButtonPress() {
         const { name, phone, shift } = this.props
-        console.log('EDIT', name, phone, shift)
+        this.props.employeeSave({ name, phone, shift })
     }
     render() {
         return (
@@ -35,5 +35,5 @@ const stateProps = state => {
 }
 
 export default connect(stateProps, {
-    employeeUpdate
+    employeeUpdate, employeeSave
 })(EmployeeEdit)
