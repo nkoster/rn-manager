@@ -1,5 +1,5 @@
 import { 
-    _employeeUpdate, _employeeCreate, _employeesFetchSuccess, _emailChanged
+    _employeeUpdate, _employeeCreate, _employeesFetchSuccess, _emailChanged, _employeeSaved
 } from '../actions/types'
 
 const initialState = {
@@ -13,6 +13,8 @@ export default (state = initialState, action) => {
         case _employeeUpdate:
             return { ...state, [action.payload.prop]: action.payload.value }
         case _employeeCreate:
+            return initialState
+        case _employeeSaved:
             return initialState
         case _employeesFetchSuccess:
             return state
