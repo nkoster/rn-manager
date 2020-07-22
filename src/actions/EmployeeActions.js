@@ -1,5 +1,5 @@
 import { 
-    _employeeUpdate, _employeeCreate, _employeesFetchSuccess
+    _employeeUpdate, _employeeCreate, _employeesFetchSuccess, _employeeSaved
 } from './types'
 import firebase from 'firebase'
 import { Actions } from 'react-native-router-flux'
@@ -41,6 +41,9 @@ export const employeeSave = ({ name, phone, shift, uid }) => {
     return dispatch => {
         firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
             .set({ name, phone, shift })
-            .then(_ => Actions.employees({ type: 'reset' }))
+            .then(_ => {
+                dispatch({ type: _employeeSaved })
+                Actions.employees({ type: 'reset' })
+            })
     }
 }
